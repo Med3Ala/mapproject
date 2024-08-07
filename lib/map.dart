@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 
 class MapWidget extends StatelessWidget {
 
-  final String tileUrl;
-  MapWidget({super.key, required this.tileUrl});
+  var tileUrl = "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
+  MapWidget(String value, {super.key, required this.tileUrl});
 
 
   final mapController = MapController();
@@ -21,13 +21,11 @@ class MapWidget extends StatelessWidget {
         initialZoom: 6,
       ),
       children: [
-        // Obx(() =>
-        TileLayer( 
-          urlTemplate: tileUrl, 
-          userAgentPackageName: 'com.example.app',
-          maxNativeZoom: 19, 
-        // )
-        ),
+          TileLayer( 
+            urlTemplate: tileUrl, 
+            userAgentPackageName: 'com.example.app',
+            maxNativeZoom: 19, 
+          )
         
       ],
     );
