@@ -7,7 +7,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:vector_map_tiles/vector_map_tiles.dart';
 
 const apiKey = "FHh9gFfl6vBRSuj5eWXi";
-const styleUrl = "https://api.maptiler.com/maps/f6a7b4d0-b349-4cb0-843f-9d70be0cdb5c/style.json";
+const styleUrl = "https://api.maptiler.com/maps/satellite/style.json";
 
 void main() {
   runApp(const MyApp());
@@ -74,16 +74,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   return FlutterMap(
                     options: MapOptions(
-                      initialCenter: const LatLng(31.050478, -7.931633),
-                      initialZoom: 12.0,
+                      initialCenter: const LatLng(34, 9.5),
+                      initialZoom: 6,
                     ),
                     children: [
-                      VectorTileLayer(
-                        theme: style.theme,
-                        sprites: style.sprites,
-                        // tileOffset: TileOffset.mapbox, enable with mapbox
-                        tileProviders: style.providers,
+                      TileLayer( // Display map tiles from any source
+                        urlTemplate: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', // OSMF's Tile Server
+                        userAgentPackageName: 'com.example.app',
+                        maxNativeZoom: 19, // Scale tiles when the server doesn't support higher zoom levels
                       ),
+                      // VectorTileLayer(
+                      //   theme: style.theme,
+                      //   sprites: style.sprites,
+                      //   // tileOffset: TileOffset.mapbox, enable with mapbox
+                      //   tileProviders: style.providers,
+                      // ),
                     ],
                   );
                 }
