@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:imap/map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:vector_map_tiles/vector_map_tiles.dart';
@@ -72,25 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   //final style = snapshot.data!;
 
-                  return FlutterMap(
-                    options: MapOptions(
-                      initialCenter: const LatLng(34, 9.5),
-                      initialZoom: 6,
-                    ),
-                    children: [
-                      TileLayer( // Display map tiles from any source
-                        urlTemplate: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', // OSMF's Tile Server
-                        userAgentPackageName: 'com.example.app',
-                        maxNativeZoom: 19, // Scale tiles when the server doesn't support higher zoom levels
-                      ),
-                      // VectorTileLayer(
-                      //   theme: style.theme,
-                      //   sprites: style.sprites,
-                      //   // tileOffset: TileOffset.mapbox, enable with mapbox
-                      //   tileProviders: style.providers,
-                      // ),
-                    ],
-                  );
+                  return MapWidget(tileUrl: "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png");
                 }
               },
             ),
