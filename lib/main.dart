@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   //final style = snapshot.data!;
 
-                  return Obx(()=> MapWidget(tileUrl.value, tileUrl: '',));
+                  return Obx(()=> MapWidget(tileUrl.value, tileUrl: tileUrl.value));
                 }
               },
             ),
