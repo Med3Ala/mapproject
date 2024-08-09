@@ -37,6 +37,7 @@ dependencies:
   flutter_map_dragmarker: ^7.0.0
   get: ^4.6.6
   latlong2: ^0.9.1
+  proj4dart: ^2.1.0
 
 dev_dependencies:
   flutter_lints: ^3.0.0

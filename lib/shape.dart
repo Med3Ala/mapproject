@@ -9,6 +9,7 @@ abstract class Shape {
   final List<LatLng> points;
   final Color? color;
   final double? strokeWidth;
+  double zoomLevel = 10;
 
   Shape({required this.points, this.color = Colors.blue, this.strokeWidth = 2.0});
 
@@ -35,6 +36,10 @@ class Polygon extends Shape {
   @override
   void removePoint(int index) {
     points.removeAt(index);
+  }
+  
+  setZoom(double zoomLevel) {
+    this.zoomLevel = zoomLevel;
   }
 }
 

@@ -19,7 +19,7 @@ class MapWidget extends StatefulWidget {
 
   final mapController = MapController();
 
-    
+  double zoomLevel = 6.0;
 
   @override
   State<MapWidget> createState() => _MapWidgetState();
@@ -34,6 +34,7 @@ class _MapWidgetState extends State<MapWidget> {
     return FlutterMap(
       options: MapOptions(
         initialCenter: LatLng(34, 9.5),
+        initialZoom: widget.zoomLevel,
         onTap: (point, latlng) {
           switch(drawAction) {
             case 'drawMarker':
@@ -43,12 +44,25 @@ class _MapWidgetState extends State<MapWidget> {
               });
               break;
             case 'drawCircle':
-              
+              shapes.add(Mcircle(center: latlng, radius: 0, color: Colors.red));
+              setState(() {
+                drawAction = 'drawCircle1';
+              });
+              break;
+            case 'drawCircle1':
+              final circle = shapes.last as Mcircle;
+              circle.setZoom(widget.zoomLevel);
+              circle.addPoint(latlng);
+              setState(() {
+                drawAction = '';
+              });
               break;
           }
           
         },
-        initialZoom: 6,
+        onPositionChanged: (position, hasGesture) {
+          widget.zoomLevel = position.zoom;
+        },
       ),
       children: [
         TileLayer( 
@@ -57,10 +71,11 @@ class _MapWidgetState extends State<MapWidget> {
           maxNativeZoom: 19, 
         ),
         CircleLayer(
-          circles: shapes.whereType<Mcircle>().map((shape) => CircleMarker(point: shape.center, radius: shape.radius, color: shape.color ?? Colors.red)).toList(),
+          circles: [...shapes.whereType<Mcircle>().map((shape) => shape.circle)],
         ),
         MarkerLayer(
           markers: [
+            ...shapes.whereType<Mcircle>().map((shape) => shape.centerMarker),
             ...shapes.whereType<Dmarker>().map((shape) => shape.obj),
             const Marker(
               width: 25.0,
