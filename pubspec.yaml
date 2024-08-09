@@ -32,11 +32,11 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   flutter:
     sdk: flutter
-  flutter_map: ^6.1.0
-  flutter_map_cancellable_tile_provider: ^2.0.0
+  flutter_map: ^7.0.2
+  flutter_map_cancellable_tile_provider: ^3.0.0
+  flutter_map_dragmarker: ^7.0.0
   get: ^4.6.6
   latlong2: ^0.9.1
-  vector_map_tiles: ^7.3.1
 
 dev_dependencies:
   flutter_lints: ^3.0.0

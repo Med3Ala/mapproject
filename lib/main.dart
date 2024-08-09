@@ -5,7 +5,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:imap/map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:vector_map_tiles/vector_map_tiles.dart';
 import 'package:get/get.dart';
 
 const apiKey = "FHh9gFfl6vBRSuj5eWXi";
@@ -49,12 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   final mapController = MapController();
-
-      Future<Style> _readStyle() => StyleReader(
-          uri: "${styleUrl}?key=${apiKey}",
-          // ignore: undefined_identifier
-          apiKey: apiKey)
-      .read();
+  
 
       // Future<Style> _loadStyle() async {
       //   // final jsonString = await rootBundle.loadString('./style.json');
@@ -75,22 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             left: 0,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: FutureBuilder<Style>(
-              future: _readStyle(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator()); // Or any loading indicator
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  final style = snapshot.data!; // Access the fetched style
-
-                  //final style = snapshot.data!;
-
-                  return Obx(()=> MapWidget(tileUrl.value, tileUrl: tileUrl.value));
-                }
-              },
-            ),
+            child: Obx(()=> MapWidget(tileUrl.value, tileUrl: tileUrl.value)),
           ),
           Positioned(
             bottom: 0,
